@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+<ul>
+    {% for file in files_folders %}
+        <li>{{ file.1 }}</li>
+    {% empty %}
+        <li>Nothing yet.</li>
+    {% endfor %}
+    
+</ul>
+
+</body>
+</html>
