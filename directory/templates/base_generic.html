@@ -6,13 +6,13 @@
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, shrink-to-fit=no">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         
         {% load static %}
 
-        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}?{% now 'U' %}">
     </head>
     <body style="height: 100%">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -31,24 +31,80 @@
         <!-- Below Navbar -->
         <div class="wrapper">
             <!-- Side Bar -->
-            <div id="sidebar" class="collapse show">
-                <div class="bg-light border-right h-100">
-                    <a class="nav-link" href="#">Folder1</a>
-                    <a class="nav-link" href="#">Folder2</a>
-                    <a class="nav-link" href="#">Folder3</a>
-                </div>
+            <div id="sidebar">
+                <ul id="drop_1" class="list-unstyled bg-light border-right h-100">
+                    <li>
+                        <a class="dropdown-toggle" href="#f1_sub" data-toggle="collapse">Folder1</a>
+                        <ul class="collapse list-unstyled" id="f1_sub">
+                            <li><a href="#">File1</a></li>
+                            <li><a href="#">File2</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#f2_sub" data-toggle="collapse">Folder2</a>
+                        <ul class="collapse list-unstyled" id="f2_sub">
+                            <li><a href="#">File3</a></li>
+                            <li><a href="#">File4</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#f3_sub" data-toggle="collapse">Folder3</a>
+                        <ul class="collapse list-unstyled" id="f3_sub">
+                            <li><a href="#">File5</a></li>
+                            <li><a href="#">File6</a></li>
+                            <li><a href="#">File7</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
 
-            <button id="sidebarCollapse" class="btn btn-info" type="button" data-toggle="collapse" data-target="#sidebar">Hi</button>
+            <button id="sidebarCollapse" class="btn btn-info" type="button">Hi</button>
+
 
             <!-- Main Content-->
             <div class="main-content">
                 <div class="search-bar-container">
-                    <div class="input-group w-50">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+                    <div class="input-group w-50" style="padding-right: 0%">
+                        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" style="margin-right: 0%">
                     </div>
                 </div>
             </div>
         </div>
+
+        <script>
+            $(document).ready(function () {
+
+                
+                var fid = 1;
+                var parent_id = 0;
+                create_sub_folder_html(fid);
+
+                function create_sub_folder_html(fid) {
+                    $.get("get_sub_dir", {id: fid}, function(d) {
+                        var data = JSON.parse(d);
+                        var folders = data["folders"];
+                        console.log(folders);
+                        for(i = 0; i < data["folders"].length; i++) {
+                            var sub_folder_html = '<li><a class="dropdown-toggle" href="#drop_' + folders[i][0] + 
+                                '" data-toggle="collapse">' + folders[i][1] + '</a><ul class="collapse list-unstyled" id="drop_' + 
+                                folders[i][0] + '"></ul></li>';
+
+                            var sub_folder_elem = $(sub_folder_html);
+                            sub_folder_elem.children().first().one("click", {fid: folders[i][0]}, function(event) { create_sub_folder_html(event.data.fid); });
+                            // sub_folder_elem.click({fid: folders[i][0]}, click_pop);
+                            
+                            $("#drop_" + fid).append(sub_folder_elem);
+                        }
+                    });
+                }
+
+                $("#sidebarCollapse").on('click', function() {
+                    $("#sidebar").toggleClass("toggled");
+                });
+            });
+
+
+
+        </script>
     </body>
 </html>
