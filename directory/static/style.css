@@ -1,3 +1,7 @@
+body {
+    font-family: "Candara", "Trebuchet MS", "Arial Black", Gadget, sans-serif; 
+}
+
 :root {
     --bars-bg-color: #0f1626;
     --bars-bg-color-light: #265ad4ef;
