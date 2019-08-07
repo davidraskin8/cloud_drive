@@ -1,15 +1,55 @@
-.sidebar-toggler {
-    max-width: 100px;
-    min-width : 100px;
-    min-height: 50px;
-    max-height: 50px;
-    margin : 20px;
-}
-
 .wrapper {
     display: flex;
     align-items: stretch;
     height: 100%;
+}
+
+.main-content {
+    flex : 1;
+}
+
+#sidebarCollapse {
+    padding: 10px;
+    display: inline-block;
+}
+
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+/* .vertical-collapse {
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    max-height: 0;
+} */
+
+/*                */
+/* Side Bar stuff */
+/*                */
+.sidebar-drop li a {
+    padding: 5px;
+    font-size: 1.1em;
+    display: block;
+}
+
+.collapse li{
+    padding-left:20px
+}
+
+.collapsing li{
+    padding-left:20px
+}
+
+.dropdown-toggle {
+    color: white;
+}
+
+.dropdown-toggle:hover {
+    background-color: rgb(82, 82, 82);
+    color: white;
+    text-decoration: none;
 }
 
 #sidebar {
@@ -28,39 +68,14 @@
     }
     #sidebar.toggled {
         margin-left: 0px;
+   
     }
 }
 
-.main-content {
-    flex : 1;
-}
-
-button {
-    flex: 0;
+.sidebar-toggler {
+    max-width: 100px;
+    min-width : 100px;
+    min-height: 50px;
     max-height: 50px;
-}
-
-.search-bar-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-}
-
-ul li a {
-    padding: 5px;
-    font-size: 1.1em;
-}
-
-.vertical-collapse {
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-    max-height: 0;
-}
-
-.collapse li {
-    padding-left:20px
-}
-
-.collapsing li {
-    padding-left:20px
+    margin : 20px;
 }

@@ -13,6 +13,7 @@
         {% load static %}
 
         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}?{% now 'U' %}">
+
     </head>
     <body style="height: 100%">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -32,37 +33,26 @@
         <div class="wrapper">
             <!-- Side Bar -->
             <div id="sidebar">
-                <ul id="drop_1" class="list-unstyled bg-light border-right h-100">
+                <ul id="drop_1" class="sidebar-drop list-unstyled bg-dark border-right h-100">
                     <!-- <li>
                         <a class="dropdown-toggle" href="#f1_sub">Folder1</a>
                         <ul class="vertical-collapse list-unstyled" id="f1_sub">
                             <li><a href="#">File1</a></li>
                             <li><a href="#">File2</a></li>
                         </ul>
-                    </li>
-                    <li>
-                        <a class="dropdown-toggle" href="#f2_sub" data-toggle="collapse">Folder2</a>
-                        <ul class="collapse list-unstyled" id="f2_sub">
-                            <li><a href="#">File3</a></li>
-                            <li><a href="#">File4</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="dropdown-toggle" href="#f3_sub" data-toggle="collapse">Folder3</a>
-                        <ul class="collapse list-unstyled" id="f3_sub">
-                            <li><a href="#">File5</a></li>
-                            <li><a href="#">File6</a></li>
-                            <li><a href="#">File7</a></li>
-                        </ul>
                     </li> -->
                 </ul>
             </div>
 
-            <button id="sidebarCollapse" class="btn btn-info" type="button">Hi</button>
+
 
 
             <!-- Main Content-->
             <div class="main-content">
+                <div id="sidebarCollapse">
+                        {% load static %}
+                        <img src='{% static "baseline-menu-24px.svg" %}' alt="My image">
+                </div>
                 <div class="search-bar-container">
                     <div class="input-group w-50" style="padding-right: 0%">
                         <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" style="margin-right: 0%">
