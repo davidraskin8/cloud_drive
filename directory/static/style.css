@@ -50,3 +50,17 @@ ul li a {
     padding: 5px;
     font-size: 1.1em;
 }
+
+.vertical-collapse {
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    max-height: 0;
+}
+
+.collapse li {
+    padding-left:20px
+}
+
+.collapsing li {
+    padding-left:20px
+}
