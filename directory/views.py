@@ -23,7 +23,8 @@ def retrieve_sub_dir(fid):
 
     context = {
         'folders': folder_id_name,
-        'files': file_id_name
+        'files': file_id_name,
+        'base_folder_path': root_folder.full_path
     }
 
     return context

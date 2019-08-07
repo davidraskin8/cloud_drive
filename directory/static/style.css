@@ -1,3 +1,31 @@
+:root {
+    --bars-bg-color: #0f1626;
+    --bars-bg-color-light: #265ad4ef;
+    --bars-bg-color-light-grad: #093cb4da;
+    --bars-highlight-color: #ffffff1c;
+    --main-font-color: white;
+}
+
+.navbar {
+    background-color: var(--bars-bg-color) !important;
+}
+
+.navbar-brand {
+    font-family: "Palatino";
+}
+
+#sidebar ul{
+    background-color: var(--bars-bg-color) !important;
+}
+
+#cur_dir {
+    background-image: linear-gradient(to right, var(--bars-bg-color-light), var(--bars-bg-color-light-grad));
+    padding: 3px;
+    padding-left: 10px;
+    color: white;
+    border-right-color: var(--bars-bg-color);
+}
+
 .wrapper {
     display: flex;
     align-items: stretch;
@@ -30,6 +58,7 @@
 /*                */
 .sidebar-drop li a {
     padding: 5px;
+    padding-left: 9px;
     font-size: 1.1em;
     display: block;
 }
@@ -43,12 +72,13 @@
 }
 
 .dropdown-toggle {
-    color: white;
+    color: var(--main-font-color);
+    border-radius: 10px 0px 0px 10px;
 }
 
 .dropdown-toggle:hover {
-    background-color: rgb(82, 82, 82);
-    color: white;
+    background-color: var(--bars-highlight-color);
+    color: var(--main-font-color);
     text-decoration: none;
 }
 
@@ -56,6 +86,7 @@
     width:250px;
     min-height: 100vh;
     transition: all 0.3s;
+    color: var(--bars-bg-color);
 }
 
 #sidebar.toggled {
@@ -78,4 +109,8 @@
     min-height: 50px;
     max-height: 50px;
     margin : 20px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #afc5fa;
 }
