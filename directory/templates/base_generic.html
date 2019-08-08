@@ -7,6 +7,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href='https://fonts.googleapis.com/css?family=Cutive' rel='stylesheet'>
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -14,6 +15,8 @@
         {% load static %}
 
         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}?{% now 'U' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'sidebar_style.css' %}?{% now 'U' %}">
+
 
     </head>
     <body style="height: 100%">
@@ -37,13 +40,16 @@
                 
                 <ul id="drop_1" class="sidebar-drop bg-dark list-unstyled border-right h-100">
                     <div id="cur_dir"><strong>\{{ base_folder_path }}</strong></div>
+                    <!-- Example Element that would populate this: -->
+
                     <!-- <li>
-                        <a class="dropdown-toggle" href="#f1_sub">Folder1</a>
+                        <div><a class="dropdown-toggle" href="#f1_sub">Folder1</a><button>+</button></div>
                         <ul class="vertical-collapse list-unstyled" id="f1_sub">
                             <li><a href="#">File1</a></li>
                             <li><a href="#">File2</a></li>
                         </ul>
                     </li> -->
+
                 </ul>
             </div>
 
@@ -57,9 +63,8 @@
                         <img src='{% static "baseline-menu-24px.svg" %}' alt="My image">
                 </div>
                 <div class="search-bar-container">
-                    <div class="input-group w-50" style="padding-right: 0%">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" style="margin-right: 0%">
-                    </div>
+                    <input class= "search-bar w-50" type="text" placeholder="Search"/>
+                    <button class= "search-button">Search</button>
                 </div>
             </div>
         </div>
@@ -79,10 +84,11 @@
                         success: function(d) {
                             var data = JSON.parse(d);
                             var folders = data["folders"];
+                            var files = data["files"];
                             console.log(folders);
                             for(i = 0; i < data["folders"].length; i++) {
-                                var sub_folder_html = '<li><a class="dropdown-toggle" href="#drop_' + folders[i][0] + 
-                                    '" data-toggle="collapse">' + folders[i][1] + '</a><ul class="vertical list-unstyled" id="drop_' + 
+                                var sub_folder_html = '<li><div><a class="dropdown-toggle" href="#drop_' + folders[i][0] + 
+                                    '" data-toggle="collapse">' + folders[i][1] + '</a><button class="add-button">+</button></div><ul class="vertical list-unstyled" id="drop_' + 
                                     folders[i][0] + '"></ul></li>';
                         
 
@@ -94,8 +100,14 @@
                                 $("#drop_" + fid).append(sub_folder_elem);
                             }
                             // drop_height(fid);
+
+                            for(i = 0; i < data["files"].length; i++) {
+                                var file_elem = $('<li><a class="file-link" href=#>' + files[i][1] + '</a></li>');
+                                $("#drop_" + fid).append(file_elem);
+                            }
                         }   
                     });
+
                 }
 
                 // function drop_height(id) {

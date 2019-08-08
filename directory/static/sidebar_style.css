@@ -1,0 +1,84 @@
+/*                */
+/* Side Bar stuff */
+/*                */
+.sidebar-drop li div a {
+    padding: 5px;
+    padding-left: 9px;
+    font-size: 1.1em;
+    flex: 1;
+}
+
+.sidebar-drop li div {
+    display: flex;
+}
+
+.sidebar-drop li {
+    overflow: 
+}
+
+.collapse li{
+    padding-left:20px
+}
+
+.collapsing li{
+    padding-left:20px
+}
+
+.dropdown-toggle {
+    color: var(--main-font-color);
+    /* border-radius: 10px 0px 0px 10px; */
+}
+
+.dropdown-toggle:hover {
+    background-color: var(--bars-highlight-color);
+    color: var(--main-font-color);
+    text-decoration: none;
+}
+
+#sidebar {
+    width:250px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    color: var(--bars-bg-color);
+}
+
+#sidebar.toggled {
+    margin-left: -250px;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.toggled {
+        margin-left: 0px;
+   
+    }
+}
+
+.sidebar-toggler {
+    max-width: 100px;
+    min-width : 100px;
+    min-height: 50px;
+    max-height: 50px;
+    margin : 20px;
+}
+
+.file-link {
+    color: var(--main-font-color);
+}
+
+.file-link:hover {
+    color: var(--main-font-color);
+    text-decoration: none;
+}
+
+.add-button {
+    float: right;
+    color: var(--bars-bg-color);
+    height: 30px;
+}
+
+.add-button:hover {
+    color: var(--main-font-color);
+}
