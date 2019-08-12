@@ -54,8 +54,6 @@
             </div>
 
 
-
-
             <!-- Main Content-->
             <div class="main-content">
                 <div id="sidebarCollapse">
@@ -66,8 +64,43 @@
                     <input class= "search-bar w-50" type="text" placeholder="Search"/>
                     <button class= "search-button">Search</button>
                 </div>
+
+                
             </div>
         </div>
+
+        <!-- Button trigger modal
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+        </button> -->
+        
+        <!-- Modal -->
+        <div class="modal fade" id="add_folder_modal" tabindex="-1" role="dialog" aria-labelledby="addFolderModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Folder</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="add_folder_form">
+                        {% csrf_token %}
+
+                        {{ folder_form }}
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" value="Submit" form="add_folder_form" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        
 
         <script>
             $(document).ready(function () {
@@ -87,19 +120,25 @@
                             var files = data["files"];
                             console.log(folders);
                             for(i = 0; i < data["folders"].length; i++) {
-                                var sub_folder_html = '<li><div><a class="dropdown-toggle" href="#drop_' + folders[i][0] + 
-                                    '" data-toggle="collapse">' + folders[i][1] + '</a><button class="add-button">+</button></div><ul class="vertical list-unstyled" id="drop_' + 
-                                    folders[i][0] + '"></ul></li>';
-                        
+                                var plus_button_html = '<button class="add-button" data-toggle="modal" data-target="#add_folder_modal">+</button>';
+                                var plus_button_elem = $(plus_button_html);
+                                plus_button_elem.onclick({fid: folders[i][0]}, function(event) {
+                                // 
+                                });
 
+
+                                var sub_folder_html = '<li><div><a class="dropdown-toggle" href="#drop_' + folders[i][0] + 
+                                    '" data-toggle="collapse">' + folders[i][1] + '</a>' + plus_button_html + 
+                                    '</div><ul class="vertical list-unstyled" id="drop_' + 
+                                    folders[i][0] + '"></ul></li>';
                                 var sub_folder_elem = $(sub_folder_html);
-                                sub_folder_elem.children().first().one("click", {fid: folders[i][0]}, function(event) { create_sub_folder_html(event.data.fid); });
-                                // sub_folder_elem.children().first().on("click", {fid: folders[i][0]}, function(event) { 
-                                //     drop_height(event.data.fid);
-                                // });          
+                                var link_div = sub_folder_elem.children(":first");
+                                
+                                link_div.children(":first").one("click", {fid: folders[i][0]}, function(event) { create_sub_folder_html(event.data.fid); });
+                                // link_div.children(":nth-child(2)").on("click", {fid: folders[i][0]}, function(event) { create_fname_input(event.data.fid); });
+                              
                                 $("#drop_" + fid).append(sub_folder_elem);
                             }
-                            // drop_height(fid);
 
                             for(i = 0; i < data["files"].length; i++) {
                                 var file_elem = $('<li><a class="file-link" href=#>' + files[i][1] + '</a></li>');
@@ -110,14 +149,13 @@
 
                 }
 
-                // function drop_height(id) {
-                //     var elem = document.getElementById("drop_" + id);
-                //      if(!elem.style.maxHeight || elem.style.maxHeight == "0px") {
-                //         elem.style.maxHeight = elem.scrollHeight + "px";
-                //     } else {
-                //         elem.style.maxHeight = null;
-                //     }
-                //     console.log(elem.style.maxHeight);
+                // function create_fname_input(fid) {
+                //     var fname_input_html = '<li><input type="text" autofocus></li>'
+                //     fname_input_elem = $(fname_input_html);
+                //     fname_input_elem.focusout(function() {
+                //         fname_input_elem.remove();
+                //     });
+                //     $("#drop_" + fid).append(fname_input_elem);
                 // }
 
                 $("#sidebarCollapse").on('click', function() {

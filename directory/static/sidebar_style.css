@@ -12,15 +12,15 @@
     display: flex;
 }
 
-.sidebar-drop li {
-    overflow: 
-}
+/* .sidebar-drop li {
+    overflow: none
+} */
 
-.collapse li{
+.collapse{
     padding-left:20px
 }
 
-.collapsing li{
+.collapsing{
     padding-left:20px
 }
 
@@ -76,9 +76,18 @@
 .add-button {
     float: right;
     color: var(--bars-bg-color);
-    height: 30px;
+    align-self: stretch;
+    background-color: var(--bars-bg-color);
+    border: 0px;
+    padding-right: 5px;
+    font-weight: bold;
+}
+
+.add-button:focus {
+    outline: none;
 }
 
 .add-button:hover {
+    background-color: var(--bars-highlight-color);
     color: var(--main-font-color);
 }

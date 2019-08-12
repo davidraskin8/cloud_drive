@@ -126,19 +126,3 @@ input.search-bar:focus {
 	position:relative;
 	top:1px;
 }
-
-.add-button:focus {
-    outline: none;
-}
-
-.add-button {
-    background-color: var(--bars-bg-color);
-    border: 0px;
-    color: white;
-    padding-right: 5px;
-    font-weight: bold;
-}
-
-.add-button:hover {
-    background-color: var(--bars-highlight-color);
-}

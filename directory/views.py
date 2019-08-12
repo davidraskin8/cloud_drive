@@ -1,10 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from directory.models import Folder, File
+from .forms import AddFolderForm
 import json
 
 def index(request):
-    context = retrieve_sub_dir(1)
+    # context = retrieve_sub_dir(1)
+    context = {}
+
+    if request.method == 'GET':
+        form = AddFolderForm()
+        context['folder_form'] = form.as_p()
+
+    if request.method == 'POST':
+        print('blar')
 
     return render(request, 'base_generic.html', context=context)
 
@@ -12,6 +21,19 @@ def get_sub_dir(request):
     context = retrieve_sub_dir(request.GET.get('id'))
 
     return HttpResponse(json.dumps(context))
+
+# def add_folder(request):
+#     if request.method == 'POST':
+#         form = AddFolderForm(request.POST)
+
+#         if form.is_valid():
+
+#             return HttpResponseRedirect('/index/')
+
+#     else:
+#         form = AddFolderForm()
+
+#     return render(request, 'base_generic.html', {'folder_form': form})
 
 # Internal function used to retrieve the files and folders in a folder of id=fid
 def retrieve_sub_dir(fid):
@@ -28,5 +50,6 @@ def retrieve_sub_dir(fid):
     }
 
     return context
+
 
     
