@@ -39,7 +39,7 @@
             <div id="sidebar">
                 
                 <ul id="drop_1" class="sidebar-drop bg-dark list-unstyled border-right h-100">
-                    <div id="cur_dir"><strong>\{{ base_folder_path }}</strong></div>
+                    <div id="cur_dir"><strong>/{{ base_folder_path }}</strong></div>
                     <!-- Example Element that would populate this: -->
 
                     <!-- <li>
@@ -85,7 +85,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" id="add_folder_form">
+                    <form method="post" id="add_folder_form" action="{% url 'add_folder' %}">
                         {% csrf_token %}
 
                         {{ folder_form }}
@@ -103,6 +103,11 @@
         
 
         <script>
+            function plus_button_onclick(fid) {
+                console.log("plus_button_onclick");
+                $('#id_parent_id').val(fid);
+            }
+
             $(document).ready(function () {
                 
                 
@@ -120,17 +125,17 @@
                             var files = data["files"];
                             console.log(folders);
                             for(i = 0; i < data["folders"].length; i++) {
-                                var plus_button_html = '<button class="add-button" data-toggle="modal" data-target="#add_folder_modal">+</button>';
-                                var plus_button_elem = $(plus_button_html);
-                                plus_button_elem.onclick({fid: folders[i][0]}, function(event) {
-                                // 
-                                });
+                                var plus_button_html = '<button class="add-button" data-toggle="modal" data-target="#add_folder_modal" value="' + 
+                                folders[i][0] + '" onclick="plus_button_onclick(this.value)">+</button>';
+                                // var plus_button_elem = $(plus_button_html);
+
 
 
                                 var sub_folder_html = '<li><div><a class="dropdown-toggle" href="#drop_' + folders[i][0] + 
                                     '" data-toggle="collapse">' + folders[i][1] + '</a>' + plus_button_html + 
                                     '</div><ul class="vertical list-unstyled" id="drop_' + 
                                     folders[i][0] + '"></ul></li>';
+
                                 var sub_folder_elem = $(sub_folder_html);
                                 var link_div = sub_folder_elem.children(":first");
                                 
