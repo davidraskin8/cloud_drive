@@ -21,7 +21,7 @@ class File(models.Model):
     parent = models.ForeignKey(to=Folder, on_delete=models.PROTECT)
 
     def get_path(instance, filename):
-        return '{0}/{1}'.format(instance.parent.full_path, filename)
+        return '{0}{1}'.format(instance.parent.full_path, filename)
 
     upload_path = models.FileField(upload_to=get_path)
 

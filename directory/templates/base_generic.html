@@ -29,7 +29,7 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link">Recent</a>
                     <a class="nav-item nav-link">Trash</a>
-                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#upload_file_modal" style="margin-left: 1rem">Upload</button>
+                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#upload_file_modal" onclick="upload_button_onclick(1)" style="margin-left: 1rem">Upload</button>
                 </div>
             </div>
         </nav>
@@ -125,7 +125,12 @@
         <script>
             function plus_button_onclick(fid) {
                 console.log("plus_button_onclick");
-                $('#id_parent_id').val(fid);
+                $('#id_folder_parent_id').val(fid);
+            }
+
+            function upload_button_onclick(fid) {
+                console.log("upload_button_onclick");
+                $('#id_file_parent_id').val(fid);
             }
 
             function toggle_drop(elem) {

@@ -30,22 +30,29 @@ def add_folder(request):
         form = AddFolderForm(request.POST)
         if form.is_valid():
             folder_name = form.cleaned_data['folder_name']
-            parent_id = form.cleaned_data['parent_id']
+            parent_id = form.cleaned_data['folder_parent_id']
 
             parent_folder = Folder.objects.get(id=parent_id)
-            full_path = parent_folder.full_path + '/' + folder_name
+            full_path = parent_folder.full_path + folder_name + '/'
             new_folder = Folder(name=folder_name, parent=parent_folder, owner='davidraskin8', full_path=full_path)
             new_folder.save()
-
             return HttpResponseRedirect('/')
+
+        else:
+            context = {'folder_form' : form}
+            print("NOT VALID")
+
+            return render(request, 'base_generic.html', context=context)
+
+
 
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
 
         if form.is_valid():
-            file = request.Files['new_file']
-            parent = Folder.objects.get(id=form.cleaned_data['parent_id'])
+            file = request.FILES['new_file']
+            parent = Folder.objects.get(id=form.cleaned_data['file_parent_id'])
             file_name = form.cleaned_data['file_name']
         
             new_file = File(upload_path=file, parent=parent, name=file_name)
