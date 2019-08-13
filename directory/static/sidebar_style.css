@@ -1,38 +1,30 @@
 /*                */
 /* Side Bar stuff */
 /*                */
-.sidebar-drop li div a {
+.sidebar-drop li div a:not([href]) {
     padding: 5px;
     padding-left: 9px;
     font-size: 1.1em;
     flex: 1;
+    color: var(--main-font-color)
+}
+
+.sidebar-drop li div a:not([href]):hover {
+    background-color: var(--bars-highlight-color);
+    color: var(--main-font-color);
+    text-decoration: none;
 }
 
 .sidebar-drop li div {
     display: flex;
 }
 
-/* .sidebar-drop li {
-    overflow: none
-} */
-
-.collapse{
-    padding-left:20px
+.hide {
+    display: none;
 }
 
-.collapsing{
-    padding-left:20px
-}
-
-.dropdown-toggle {
-    color: var(--main-font-color);
-    /* border-radius: 10px 0px 0px 10px; */
-}
-
-.dropdown-toggle:hover {
-    background-color: var(--bars-highlight-color);
-    color: var(--main-font-color);
-    text-decoration: none;
+.sub-f-list {
+    padding-left: 20px;
 }
 
 #sidebar {
@@ -66,10 +58,14 @@
 
 .file-link {
     color: var(--main-font-color);
+    display: block;
+    font-size: 1.1em;
+    padding: 5px;
 }
 
 .file-link:hover {
     color: var(--main-font-color);
+    background-color: var(--bars-highlight-color);
     text-decoration: none;
 }
 

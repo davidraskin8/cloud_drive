@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from directory.models import Folder, File
-from .forms import AddFolderForm
+from .forms import AddFolderForm, UploadFileForm
 import json
 
 def index(request):
@@ -11,6 +11,9 @@ def index(request):
     if request.method == 'GET':
         form = AddFolderForm()
         context['folder_form'] = form.as_p()
+
+        form = UploadFileForm()
+        context['file_form'] = form.as_p()
 
     # if request.method == 'POST':
     #     form = AddFolderForm(request.POST)
@@ -35,6 +38,27 @@ def add_folder(request):
             new_folder.save()
 
             return HttpResponseRedirect('/')
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            file = request.Files['new_file']
+            parent = Folder.objects.get(id=form.cleaned_data['parent_id'])
+            file_name = form.cleaned_data['file_name']
+        
+            new_file = File(upload_path=file, parent=parent, name=file_name)
+            new_file.save()
+            return HttpResponseRedirect('/')
+            
+        else:
+            context = {'file_form' : form}
+            print("NOT VALID")
+
+            return render(request, 'base_generic.html', context=context)
+
+   
         
 
 # Internal function used to retrieve the files and folders in a folder of id=fid

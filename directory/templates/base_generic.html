@@ -29,6 +29,7 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link">Recent</a>
                     <a class="nav-item nav-link">Trash</a>
+                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#upload_file_modal" style="margin-left: 1rem">Upload</button>
                 </div>
             </div>
         </nav>
@@ -64,17 +65,10 @@
                     <input class= "search-bar w-50" type="text" placeholder="Search"/>
                     <button class= "search-button">Search</button>
                 </div>
-
-                
             </div>
         </div>
-
-        <!-- Button trigger modal
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Launch demo modal
-        </button> -->
         
-        <!-- Modal -->
+        <!-- Add Folder Modal -->
         <div class="modal fade" id="add_folder_modal" tabindex="-1" role="dialog" aria-labelledby="addFolderModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -100,12 +94,42 @@
             </div>
         </div>
 
+        <!-- Upload File Modal -->
+        <div class="modal fade" id="upload_file_modal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Folder</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="upload_file_form" action="{% url 'upload_file' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        {{ file_form }}
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" value="Submit" form="upload_file_form" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
         
 
         <script>
             function plus_button_onclick(fid) {
                 console.log("plus_button_onclick");
                 $('#id_parent_id').val(fid);
+            }
+
+            function toggle_drop(elem) {
+                $(elem.getAttribute('data-link')).toggleClass("hide");
             }
 
             $(document).ready(function () {
@@ -130,10 +154,9 @@
                                 // var plus_button_elem = $(plus_button_html);
 
 
-
-                                var sub_folder_html = '<li><div><a class="dropdown-toggle" href="#drop_' + folders[i][0] + 
-                                    '" data-toggle="collapse">' + folders[i][1] + '</a>' + plus_button_html + 
-                                    '</div><ul class="vertical list-unstyled" id="drop_' + 
+                                var sub_folder_html = '<li><div><a class="dropdown-toggle" data-link="#drop_' + folders[i][0] + 
+                                    '" data-toggle="#" role= "button" onclick="toggle_drop(this)">' + folders[i][1] + '</a>' + plus_button_html + 
+                                    '</div><ul class="sub-f-list vertical list-unstyled hide" id="drop_' + 
                                     folders[i][0] + '"></ul></li>';
 
                                 var sub_folder_elem = $(sub_folder_html);
