@@ -1,32 +1,7 @@
 # cloud_drive
-Are you reading me yet? Yes? Good.
 
-Still reading me? No worries. Take your time.
+This a cloud site for storing files.
 
+The backend is built with Django, and, for now, the database is SQLite.
 
-So how much longer are you planning to readme? I got places to be.
-
-
-
-Really, I'm getting tired.
-
-
-
-You really shoulda been gone by the fourth line.
-
-
-
-ENOUGH ALREADY. STOP READING ME.
-
-LEAVE. NOW.
-
-
-
-PLEEEEEASEE LEAVEEEE.
-
-
-
-IAIEJFPIEAOPJDFE;AJKF;LDJIEPAIDJFE...
-
-...
-
+I plan on implementing code editing functionality soon as well.
